@@ -12,7 +12,7 @@ impl Shape {
         for i in 1..self.vecs.len() {
             center += self.vecs[i];
         }
-        return center;
+        return center / (self.vecs.len() as f32);
     }
 
     fn init(&mut self, points: Vec<Vector3<f32>>) {
@@ -126,6 +126,17 @@ fn GJK(s1: &mut Shape, s2: &mut Shape) -> bool {
 }
 
 fn main() {
+
+
+    let mut s1 = Shape {
+        vecs:  vec![Vector3::new(1.03, -2.9, 0.0),  Vector3::new(4.38, -2.02, 0.0), Vector3::new(3.75, -3.1, 0.0)],
+    };
+
+    let mut s2 = Shape {
+        vecs:  vec![Vector3::new(1.0, 1.0, 0.0),  Vector3::new(3.0, -0.2, 0.0), Vector3::new(4.66, -2.63, 0.0)],
+    };
+
+    println!("{}", GJK(&mut s1, &mut s2));
 
 
 }
