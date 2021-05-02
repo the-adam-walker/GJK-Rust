@@ -21,7 +21,7 @@ impl Shape {
         }
     }
 
-    fn furthestPoint(&mut self, d: Vector3<f32>) -> Vector3<f32> {
+    fn furthestPoint(&mut self, d: &mut Vector3<f32>) -> Vector3<f32> {
         let mut dotMax = 0.0;
         let mut currentVector = Vector3::<f32>::new(0.0,0.0,0.0);
         for i in 0..self.vecs.len() {
@@ -36,7 +36,7 @@ impl Shape {
     }
 }
 
-fn support(s1: Shape, s2: Shape, d: &mut Vector3<f32>) -> Vector3<f32> {
+fn support(s1: &mut Shape, s2: &mut Shape, d: &mut Vector3<f32>) -> Vector3<f32> {
     return s1.furthestPoint(d) - s2.furthestPoint(-d);
 }
 
