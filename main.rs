@@ -28,7 +28,7 @@ impl Shape {
             let mut vec = self.vecs[i];
             let mut dotCurrent = (vec - self.centroid()).dot(&d);
             if dotCurrent > dotMax {
-                dotCurrent = dotMax;
+                dotMax = dotCurrent;
                 currentVector = vec;
             }
         }
@@ -103,20 +103,20 @@ fn GJK(s1: &mut Shape, s2: &mut Shape) -> bool {
     //Vector3<T> d = (s2.centroid() - s1.centroid()).normalize();
     let mut d = (s2.centroid() - s1.centroid()).normalize();
 
-    let mut simplex: Vec<Vector3<f32>>;
-    simplex.push(support(s1, s2, &mut d));
+    let mut simplex: Vec<Vector3<f32>> = vec![support(s1, s2, &mut d)];
+
 
 
     d = Vector3::new(0.0,0.0,0.0) - simplex[0];
 
     while true {
         let mut A = support(s1, s2, &mut d);
-        if A.dot(d) < 0.0 {
+        if A.dot(&d) < 0.0 {
             return false;
         }
         else {
             simplex.push(A);
-            if handleSimplex(simplex,&mut d) {
+            if handleSimplex(&mut simplex, &mut d) {
                 return true;
             }
         }
