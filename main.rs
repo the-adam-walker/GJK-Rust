@@ -36,7 +36,9 @@ impl Shape {
     }
 }
 
-
+fn tripProd(v1: Vector3<f32>,v2: Vector3<f32>, v3: Vector3<f32>) -> Vector3<f32> {
+    return (v1.cross(&v2)).cross(&v3);
+}
 
 
 fn main() {
