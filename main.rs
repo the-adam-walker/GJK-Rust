@@ -1,7 +1,6 @@
 use nalgebra::Vector3;
 
 
-#[derive(Clone, Copy)]
 struct Shape {
     vecs: Vec<Vector3<f32>>,
 }
@@ -99,19 +98,20 @@ fn handleSimplex(simplex: &mut Vec<Vector3<f32>>, d: &mut Vector3<f32>) -> bool 
 }
 
 
-fn GJK(&mut s1: Shape, &mut s2: Shape) -> bool {
+fn GJK(s1: &mut Shape, s2: &mut Shape) -> bool {
 
     //Vector3<T> d = (s2.centroid() - s1.centroid()).normalize();
     let mut d = (s2.centroid() - s1.centroid()).normalize();
 
-    let mut simplex: Vec<Vector3<f32>> = (support(s1, s2, &mut d));
+    let mut simplex: Vec<Vector3<f32>>;
+    simplex.push(support(s1, s2, &mut d));
 
 
-    d = Vector3::new(0,0,0.0,0.0) - simplex[0];
+    d = Vector3::new(0.0,0.0,0.0) - simplex[0];
 
     while true {
         let mut A = support(s1, s2, &mut d);
-        if A.dot(d) < 0 {
+        if A.dot(d) < 0.0 {
             return false;
         }
         else {
