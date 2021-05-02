@@ -57,18 +57,16 @@ fn triangle_case(simplex: &mut Vec<Vector3<f64>>, d: &mut Vector3<f64>) -> bool 
     let abperp = trip_prod(ac, ab, ab);
     let acperp = trip_prod(ab, ac, ac);
 
-    if abperp.dot(&ao) > 0.0 {
+    return if abperp.dot(&ao) > 0.0 {
         simplex.remove(simplex.len() - 3);
         *d = abperp;
-        return false;
-    }
-    else if acperp.dot(&ao) > 0.0 {
+        false
+    } else if acperp.dot(&ao) > 0.0 {
         simplex.remove(simplex.len() - 2);
         *d = acperp;
-        return false;
-    }
-    else {
-        return true;
+        false
+    } else {
+        true
     }
 }
 
