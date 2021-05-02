@@ -1,5 +1,5 @@
 [package]
-name = "GJK-Rust"
+name = "gjk_rust"
 version = "0.1.0"
 authors = ["danieljpietz <danieljpietz@gmail.com>"]
 edition = "2018"
@@ -12,6 +12,6 @@ nalgebra = "0.26.2"
 
 
 [[bin]]
-name = "GJK-Rust"
+name = "gjk_rust"
 path = "main.rs"
 
